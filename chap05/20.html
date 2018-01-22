@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<!--
+    범위를 가지는 slot
+    v-for를 사용해 범위를 지닌 slot의 경우 template 엘리먼트와 scope 속성을 통해 처리할 수 있습니다.
+-->
+<body>
+    <div id="app">
+        <sample-component>
+            <template scope="props">
+                <li>{{props.fruitName}}: {{props.price}}</li>
+            </template>
+        </sample-component>
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/x-template" id="sample-component-template">
+        <div>
+            <ul>
+                <!-- 'name' 옵션과 겹칠 수 있기에 'fruit-name'으로 사용 -->
+                <slot v-for="item in fruits" :fruit-name="item.name" :price="item.price"></slot>
+            </ul>
+        </div>
+    </script>
+    <script>
+        Vue.component('sample-component', {
+            template: '#sample-component-template',
+            data: function() {
+                return {
+                    fruits: [
+                        {
+                            name: 'Apple',
+                            price: 1500
+                        },
+                        {
+                            name: 'Banana',
+                            price: 900
+                        }
+                    ]
+                }
+            }
+        });
+
+        new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+</html>
+<!--
+    여기서 scope는 자식 컴포넌트의 slot으로 부터 전달된 값을 저장하는 임시 변수의 명을 지정합니다
+    꼭 props일 필요는 없습니다
+-->

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<!--
+    이름을 가지는 slot
+    slot 엘리먼트는 name이라는 속성을 가질 수 있습니다.
+    name 속성을 이용하면 여러 개의 slot을 이용할 수 있습니다
+-->
+<body>
+    <div id="app">
+        <post>
+            <h1 slot="title">{{title}}</h1>
+            <p slot="contents">{{contents}}</p>
+            <p slot="a">{{contents}}</p>
+            <p slot="a">{{contents}}</p>
+            <p slot="a">{{contents}}</p>
+            <p slot="a">AAA</p>
+        </post>
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/x-template" id="post-template">
+        <div>
+
+            <slot name="title">제목 입니다.</slot>
+            <slot name="contents">
+                안녕하세요. 이곳에는 내용이 들어갑니다. 오늘도 Vue.js를 배워봅시다!
+            </slot>
+            <slot name="a">TEST</slot>
+            <slot name="b">TEST</slot>
+            <slot name="c">TEST</slot>
+            <slot name="d">TEST</slot>
+            
+        </div>
+    </script>
+    <script>
+        Vue.component('post', {
+            template: '#post-template'
+        });
+
+        new Vue({
+            el: '#app',
+            data: {
+                title: '오늘은 slot에 대해 배워봅시다.',
+                contents: '부모 컴포넌트는 자식 컴포넌트에게 `slot`을 이용해 템플릿을 전달할 수 있습니다.'
+            }
+        });
+
+    </script>
+</body>
+</html>
+<!--
+    부모 콘텐츠는 부모 컴포넌트에서 컴파일됩니다. 
+    따라서 부모 컴포넌트의 데이터를 사용할 수 있지만 자식 컴포넌트의 데이터는 사용할 수 없습니다.
+-->

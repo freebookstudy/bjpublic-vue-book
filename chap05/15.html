@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<!-- 
+    컴포넌트의 V-model 
+    <input v-model="model"> 은
+    <input v-bind:value="model" v-on:input="model = $event.target.value"> 와 같다
+    컴포넌트의 v-model은 .sync처럼 일종의 Syntax Sugar라고 볼 수 있다. 그러므로 컴포넌트에 v-model을 사용하려면
+    valueprop과 input 이벤트를 사용해야 합니다.
+-->
+<body>
+    <div id="app">
+        <email-input v-model="email"></email-input>
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/x-template" id="email-input-template">
+        <div>
+            <label>
+                <input type="text" :value="value" v-on:input="validate">
+                상태: {{statusMessage}}
+            </label>
+        </div>
+    </script>
+    <script>
+    Vue.component('email-input', {
+        props: ['value'],
+        template: '#email-input-template',
+        data: function() {
+            return { status: false };
+        },
+        computed: {
+            statusMessage: function() {
+                return this.status ? '가능' : '불가능';
+            }
+        },
+        methods: {
+            validate: function(event) {
+                this.value = event.target.value;
+                console.log('event.target.value : '+ event.target.value);
+                if(!/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(this.value)) {
+                    this.status = false;
+                } else {
+                    this.status = true;
+                }
+            }
+        }
+    });
+    new Vue({
+        el: '#app',
+        data: {
+            email : 'rock1191@naver.com'
+        }
+    });
+    </script>
+</body>
+</html>

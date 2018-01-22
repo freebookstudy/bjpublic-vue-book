@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<!-- 
+    slot
+    부모 컴포넌트는 자식 컴포넌트에게 slot을 이용해 템플릿을 전달할 수 있습니다. 
+    이러한 방식을 콘텐츠 배포라고 합니다
+-->
+<body>
+    <div id="app">
+        <post>
+            안녕하세요 이곳에는 내용이 들어갑니다. 오늘도 Vue.js를 배워봅시다!
+            <!-- 이 템플릿이 'slot'에 전달됩니다. -->
+        </post>
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/x-template" id="post-template">
+    <!-- post 템플릿 -->
+        <div>
+            <h1>제목 입니다.</h1>
+            <p>
+                <slot></slot>
+            </p>
+        </div>
+    </script>
+    <script>
+        Vue.component('post', {
+            template: '#post-template'
+        });
+
+        new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+</html>
+<!-- 
+    post 컴포넌트를 사용한 곳을 살펴보면 기존에 컴포넌트를 사용한 방법과 달리 컴포넌트 내부에 템플릿이 존재한다.
+    이 부분을 부모 콘텐츠라고 한다
+    본래라면 무시되지만 slot을 사용한다면 slot 엘리먼트가 있는 위치에 부모 콘텐츠가 삽입된다
+-->

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <post>Hello, Vue.js!!</post>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/x-template" id="post-template">
+        <div>
+            <h1>제목 입니다.</h1>
+            <p>
+                <slot>
+                    안녕하세요. 이곳에는 내용이 들어갑니다. 오늘도 Vue.js를 배워봅시다!
+                </slot>
+            </p>
+        </div>
+    </script>
+    <script>
+        Vue.component('post', {
+            template: '#post-template'
+        });
+
+        new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+</html>
+<!--
+    만약 slot 내부에 콘텐츠가 존재하고 부모 콘텐츠가 비어 있다면 slot 자체의 콘텐츠가 렌더링 됩니다
+    이것을 대체 콘텐츠라고 합니다
+-->

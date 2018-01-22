@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Example</title>
+    
+</head>
+<body>
+    <div id="app">
+      <button @click="changeValue">클릭하면 값이 변합니다.</button><br>
+      {{value}}
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                value: 12345
+            },
+            methods: {
+                changeValue: function() {
+                    console.log('먼저?');
+                    this.value = Math.random();
+                }
+            },
+            updated: function() {
+                console.log('재렌더링 완료!');
+            }
+        });
+    </script>
+</body>
+</html>
