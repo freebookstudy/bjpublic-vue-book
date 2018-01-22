@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 예제 작성을 위해 bootstrap을 사용 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<!--
+    동적 컴포넌트
+    component 엘리먼트를 사용해 여러 컴포넌트를 동적으로 전환할 수 있습니다
+    동적 컴포넌트는 탭 메뉴를 작성할 때 좋습니다
+-->
+<body>
+    <div id="app">
+        <div class="container">
+            <ul class="nav nav-tabs">
+                <li @click="currentView = 'home'"><a href="#">Home</a></li>
+                <li @click="currentView = 'profile'"><a href="#">Profile</a></li>
+                <li @click="currentView = 'messages'"><a href="#">Messages</a></li>
+            </ul>
+            <component :is="currentView"></component>
+        </div>
+
+        <script src="https://unpkg.com/vue"></script>
+        <script type="text/x-template" id="home-component-template">
+            <div>
+                This is home!
+            </div>
+        </script>
+
+        <script type="text/x-template" id="profile-component-template">
+            <div>
+                Name: Lee Sun-Hyoup<br>
+                Age: 24<br>
+                Weight: 70Kg
+            </div>
+        </script>
+
+        <script type="text/x-template" id="messages-component-template">
+            <div>
+                <ul>
+                    <li>First</li>
+                    <li>Second</li>
+                    <li>Third</li>
+                </ul>
+            </div>
+        </script>
+
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    currentView: 'home'
+                },
+                components: {
+                    home: {
+                        template: '#home-component-template'
+                    },
+                    profile: {
+                        template: '#profile-component-template'
+                    },
+                    messages: {
+                        template: '#messages-component-template'
+                    }
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>
+<!--
+    동적 컴포넌트를 사용하기 위해서는 component 엘리먼트에 is 속성을 통해 컴포넌트를 바인딩합니다
+    is속성에 바인딩되어야 할 값은 컴포넌트의 이름입니다
+-->
