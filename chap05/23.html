@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Example</title>
+    <!-- 예제 작성을 위해 bootstrap을 사용 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<!--
+    Keep-alive
+    만약 컴포넌트의 상태를 유지하고 싶다면 keep-alive 엘리먼트를
+    사용해 해결할 수 있습니다.
+-->
+<body>
+    <div id="app">
+        <div class="container">
+            <ul class="nav nav-tabs">
+                <li @click="currentView = 'first'"><a href="#">First</a></li>
+                <li @click="currentView = 'second'"><a href="#">Second</a></li>
+            </ul>
+            <keep-alive>
+                <component :is="currentView"></component>
+            </keep-alive>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/x-template" id="first-component-template">
+        <div>
+            This is first component!
+        </div>
+    </script>
+
+    <script type="text/x-template" id="second-component-template">
+        <div>
+            <input type="text">
+        </div>
+    </script>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                currentView: 'first'
+            },
+            components: {
+                first: {
+                    template: '#first-component-template'
+                },
+                second: {
+                    template: '#second-component-template'
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+<!-- 
+    단순히 keep-alive 엘리먼트를 추가한 것 만으로도 해결됩니다.
+-->

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Example</title>
+    <!--
+        v-once
+        애플리케이션 개발에는 서비스 이용약관과 같이 데이터가 없는 정적 콘텐츠를 렌더링하는
+        경우도 있습니다. 이런 경우에는 여러 번 캐시될 필요가 없습니다. 단 한 번만 캐시를 실행
+        하기 위해서는 컴포넌트 템플릿의 루트 엘리먼트에 v-once를 추가하면 됩니다
+    -->
+</head>
+<body>
+    <div id="app">
+        <static-component></static-component>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/x-template" id="static-component-template">
+        <div v-once>
+            <h1>이용약관</h1>
+            <p>이용약관 내용입니다</p>
+        </div>
+    </script>
+
+    <script>
+        Vue.component('static-component', {
+            template: '#static-component-template'
+        });
+        new Vue({
+            el: '#app'
+        });
+    </script>
+</body>
+</html>
